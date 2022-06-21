@@ -218,11 +218,6 @@ Let's use arrows to clarify the directionality of this first part of the action 
 -\int d^4 x \gpgrade{ \lr{\delta A} \lrgrad F - \lr{\delta A} \rgrad F + \lr{ \delta A } J }{0,4}.
 \end{aligned}
 \end{equation}
-We can cast the first term into an integrand that can be evaluated using the Fundamental Theorem of Geometric Calculus, by introducing a
-a parameterization \( x = x(a_\mu) \), for which the tangent space basis vectors are \( \Bx_{a_\mu} = \PDi{a_\mu}{x} \), and the pseudoscalar volume element is
-\begin{equation}\label{eqn:maxwellLagrangian:1640}
-   d^4 \Bx = \lr{ \Bx_{a_0} \wedge \Bx_{a_1} \wedge \Bx_{a_2} \wedge \Bx_{a_3} } da_0 da_1 da_2 da_3 = I d^4 x.
-\end{equation}
 Writing \( d^4 x = -I d^4 \Bx \), we have
 \begin{equation}\label{eqn:maxwellLagrangian:1600}
 \begin{aligned}
@@ -233,21 +228,24 @@ Writing \( d^4 x = -I d^4 \Bx \), we have
 -\int_V \gpgrade{ -\lr{\delta A} I d^4 \Bx \lrgrad F - d^4 x \lr{\delta A} \rgrad F + d^4 x \lr{ \delta A } J }{0,4} \\
 &=
 \int_{\partial V} \gpgrade{ \lr{\delta A} I d^3 \Bx F }{0,4}
-+ \int_V d^4 x \gpgrade{ \lr{\delta A} \lr{ \rgrad F - J + I M } }{0,4}.
++ \int_V d^4 x \gpgrade{ \lr{\delta A} \lr{ \rgrad F - J } }{0,4}.
 \end{aligned}
 \end{equation}
 The first integral is killed since \( \delta A = 0 \) on the boundary.  For the second integral to be zero for all variations \( \delta A \), we must have
 \begin{equation}\label{eqn:maxwellLagrangian:1660}
-   \gpgrade{ \lr{\delta A} \lr{ \rgrad F - J + I M } }{0,4} = 0,
+   \gpgrade{ \lr{\delta A} \lr{ \rgrad F - J } }{0,4} = 0.
 \end{equation}
-but have argued previously that we can drop the grade selection, leaving
+We may now drop the directional indicator on our gradient has been dropped, since there is no longer any ambiguity.  It looks like we can immediately state that \( \grad F = J \), since we require an overall zero for all variations \( \delta A \), but there is also the pesky grade selection filter to consider.  Since \( F = \grad \wedge A \), and \( \grad \wedge F = 0 \) by construction, the only non-zero grades in the multivector equation \( \grad F = J \) are vector grades, which means
+\begin{equation}\label{eqn:maxwellLagrangian:n}
+   \gpgrade{ \lr{\delta A} \lr{ \grad F - J } }{0,4} = \lr{\delta A} \cdot \lr{ \grad F - J } = 0.
+\end{equation}
+For this vector dot product to be zero for all variations \( \delta A \), we must have
 \begin{equation}\label{eqn:maxwellLagrangian:1620}
    \boxed{
-      \grad F = J
-   },
+      \grad F = J.
+   }
 \end{equation}
-where the directional indicator on our gradient has been dropped, since there is no longer any ambiguity.  This is Maxwell's equation in it's coordinate free STA form, found using the variational principle from a coordinate free multivector Maxwell Lagrangian, without having to resort to a coordinate expansion of that Lagrangian.
-
+This is Maxwell's equation in it's coordinate free STA form, found using the variational principle from a coordinate free multivector Maxwell Lagrangian, without having to resort to a coordinate expansion of that Lagrangian.
 
 %}
 %\EndArticle
