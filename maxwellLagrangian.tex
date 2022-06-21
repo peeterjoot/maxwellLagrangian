@@ -202,22 +202,15 @@ We may start our variation in terms of \( F \) and \( A \)
 &=
 \int d^4 x \gpgrade{ \lr{ \grad \wedge \lr{\delta A} } F - \lr{ \delta A } J }{0} \\
 &=
--\int d^4 x \gpgrade{ \lr{ \lr{\delta A} \grad } F - \lr{ \lr{ \delta A } \cdot \grad } F + \lr{ \delta A } J }{0,4} \\
+-\int d^4 x \gpgrade{ \lr{ \lr{\delta A} \lgrad } F - \lr{ \lr{ \delta A } \cdot \lgrad } F + \lr{ \delta A } J }{0,4} \\
 &=
--\int d^4 x \gpgrade{ \lr{ \lr{\delta A} \grad } F + \lr{ \delta A } J }{0,4}.
+-\int d^4 x \gpgrade{ \lr{ \lr{\delta A} \lgrad } F + \lr{ \delta A } J }{0,4} \\
+&=
+-\int d^4 x \gpgrade{ \lr{\delta A} \lrgrad F - \lr{\delta A} \rgrad F + \lr{ \delta A } J }{0,4},
 \end{aligned}
 \end{equation}
+where we have used arrows, when required, to indicate the directional action of the gradient.
 
-Let's use arrows to clarify the directionality of this first part of the action variation, writing
-\begin{equation}\label{eqn:maxwellLagrangian:1580}
-\begin{aligned}
-\delta S
-&=
--\int d^4 x \gpgrade{ \lr{\delta A} \lgrad F + \lr{ \delta A } J }{0,4} \\
-&=
--\int d^4 x \gpgrade{ \lr{\delta A} \lrgrad F - \lr{\delta A} \rgrad F + \lr{ \delta A } J }{0,4}.
-\end{aligned}
-\end{equation}
 Writing \( d^4 x = -I d^4 \Bx \), we have
 \begin{equation}\label{eqn:maxwellLagrangian:1600}
 \begin{aligned}
@@ -231,15 +224,12 @@ Writing \( d^4 x = -I d^4 \Bx \), we have
 + \int_V d^4 x \gpgrade{ \lr{\delta A} \lr{ \rgrad F - J } }{0,4}.
 \end{aligned}
 \end{equation}
-The first integral is killed since \( \delta A = 0 \) on the boundary.  For the second integral to be zero for all variations \( \delta A \), we must have
+The first integral is killed since \( \delta A = 0 \) on the boundary.  The integrand of the remaining integral can be simplified to
 \begin{equation}\label{eqn:maxwellLagrangian:1660}
-   \gpgrade{ \lr{\delta A} \lr{ \rgrad F - J } }{0,4} = 0.
+   \gpgrade{ \lr{\delta A} \lr{ \rgrad F - J } }{0,4} = 
+   \gpgrade{ \lr{\delta A} \lr{ \grad F - J } }{0},
 \end{equation}
-We may now drop the directional indicator on our gradient has been dropped, since there is no longer any ambiguity.  It looks like we can immediately state that \( \grad F = J \), since we require an overall zero for all variations \( \delta A \), but there is also the pesky grade selection filter to consider.  Since \( F = \grad \wedge A \), and \( \grad \wedge F = 0 \) by construction, the only non-zero grades in the multivector equation \( \grad F = J \) are vector grades, which means
-\begin{equation}\label{eqn:maxwellLagrangian:n}
-   \gpgrade{ \lr{\delta A} \lr{ \grad F - J } }{0,4} = \lr{\delta A} \cdot \lr{ \grad F - J } = 0.
-\end{equation}
-For this vector dot product to be zero for all variations \( \delta A \), we must have
+where the grade-4 filter has also been discarded since \( \grad F = \grad \cdot F + \grad \wedge F = \grad \cdot F \) since \( \grad \wedge F = \grad \wedge \grad \wedge A = 0 \) by construction, which implies that the only non-zero grades in the multivector \( \grad F - J \) are vector grades.  Also, the directional indicator on the gradient has been dropped, since there is no longer any ambiguity.  We seek solutions of \( \gpgrade{ \lr{\delta A} \lr{ \grad F - J } }{0} = 0 \) for all variations \( \delta A \), namely
 \begin{equation}\label{eqn:maxwellLagrangian:1620}
    \boxed{
       \grad F = J.
