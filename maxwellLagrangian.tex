@@ -4,7 +4,7 @@
 %
 %{
 \input{../latex/blogpost.tex}
-\renewcommand{\basename}{demo}
+\renewcommand{\basename}{maxwellLagrangian}
 %\renewcommand{\dirname}{notes/phy1520/}
 \renewcommand{\dirname}{notes/foo/}
 %\newcommand{\dateintitle}{}
@@ -24,7 +24,7 @@
 %\usepackage{txfonts} % \ointclockwise
 
 \beginArtNoToc
-\generatetitle{Maxwell equation, multivector Lagrangian.}
+\generatetitle{A multivector Lagrangian for Maxwell's equation.}
 
 \section{STA form of Maxwell's equation.}
 
@@ -88,7 +88,7 @@ The electromagnetic field \( F \), is a vector-bivector multivector in the multi
 \begin{equation}\label{eqn:maxwellLagrangian:1830}
    F = \inv{2} \gamma_\mu \wedge \gamma_\nu F^{\mu\nu},
 \end{equation}
-where \( F^{\mu\nu} \) is an abitrary antisymmetric 2nd rank tensor.  Maxwell's equation has a vector and trivector component, which may be split out explicitly using grade selection, to find
+where \( F^{\mu\nu} \) is an arbitrary antisymmetric 2nd rank tensor.  Maxwell's equation has a vector and trivector component, which may be split out explicitly using grade selection, to find
 \begin{equation}\label{eqn:maxwellLagrangian:360}
 \begin{aligned}
    \grad \cdot F &= J \\
@@ -130,7 +130,7 @@ We may show this though application of the Euler-Lagrange equations
    &= F^{\mu\nu}.
 \end{aligned}
 \end{equation}
-So \( \partial_\nu F^{\mu\nu} = J^\mu \), the equivalent of \( \grad \cdot F = J \), as expected.
+So \( \partial_\nu F^{\nu\mu} = J^\mu \), the equivalent of \( \grad \cdot F = J \), as expected.
 
 \section{Coordinate-free representation and variation of the Lagrangian.}
 Because
@@ -169,7 +169,7 @@ The first such tool is the notational freedom to let the gradient act bidirectio
    &= \lr{ \partial_\mu Q } \gamma^\mu R + Q \gamma^\mu \lr{ \partial_\mu R }.
 \end{aligned}
 \end{equation}
-In the final statement, the partials are acting exclusively on \( Q \) and \( R \) respectively, but the \( \gamma^\mu \) factors must remain in place, as they do not neccessarily commute with any of the multivector factors.
+In the final statement, the partials are acting exclusively on \( Q \) and \( R \) respectively, but the \( \gamma^\mu \) factors must remain in place, as they do not necessarily commute with any of the multivector factors.
 
 This bidirectional action is a critical aspect of the Fundamental Theorem of Geometric calculus, another tool that we will require.  The specific form of that theorem that we will utilize here is
 \begin{equation}\label{eqn:maxwellLagrangian:1970}
@@ -224,7 +224,7 @@ Writing \( d^4 x = -I d^4 \Bx \), we have
 + \int_V d^4 x \gpgrade{ \lr{\delta A} \lr{ \rgrad F - J } }{0,4}.
 \end{aligned}
 \end{equation}
-The first integral is killed since \( \delta A = 0 \) on the boundary.  The integrand of the remaining integral can be simplified to
+The first integral is killed since \( \delta A = 0 \) on the boundary.  The remaining integrand can be simplified to
 \begin{equation}\label{eqn:maxwellLagrangian:1660}
    \gpgrade{ \lr{\delta A} \lr{ \rgrad F - J } }{0,4} = 
    \gpgrade{ \lr{\delta A} \lr{ \grad F - J } }{0},
@@ -236,6 +236,28 @@ where the grade-4 filter has also been discarded since \( \grad F = \grad \cdot 
    }
 \end{equation}
 This is Maxwell's equation in it's coordinate free STA form, found using the variational principle from a coordinate free multivector Maxwell Lagrangian, without having to resort to a coordinate expansion of that Lagrangian.
+
+\section{Lagrangian for fictitious magnetic sources.}
+The generalization of the Lagrangian to include magnetic charge and current densities can be as simple as utilizing two independent four-potential fields
+\begin{equation}\label{eqn:maxwellLagrangian:n}
+    \LL = \inv{2} \lr{ \grad \wedge A }^2 - A \cdot J + \alpha \lr{ \inv{2} \lr{ \grad \wedge K }^2 - K \cdot M },
+\end{equation}
+where \( \alpha \) is an arbitrary multivector constant.
+
+Variation of this Lagrangian provides two independent equations
+\begin{equation}\label{eqn:maxwellLagrangian:1840}
+\begin{aligned}
+   \grad \lr{ \grad \wedge A } &= J \\
+   \grad \lr{ \grad \wedge K } &= M.
+\end{aligned}
+\end{equation}
+We may add these, scaling the second by \( -I \) (recall that \( I, \grad \) anticommute), to find
+\begin{equation}\label{eqn:maxwellLagrangian:1860}
+   \grad \lr{ F_{\mathrm{e}} + I F_{\mathrm{m}} } = J - I M,
+\end{equation}
+which is \( \grad F = J - I M \), as desired.
+
+It would be interesting to explore whether it is possible find Lagrangian that is dependent on a multivector potential, that would yield \( \grad F = J - I M \) directly, instead of requiring a superposition operation from the two independent solutions.  One such possible potential is \( \tilde{A} = A - I K \), for which \( F = \gpgradetwo{ \grad \tilde{A} } = \grad \wedge A + I \lr{ \grad \wedge K } \).  The author was not successful constructing such a Lagrangian.
 
 %}
 %\EndArticle
