@@ -17,6 +17,7 @@
 \usepackage{peeters_figures}
 \usepackage{siunitx}
 \usepackage{verbatim}
+\usepackage{macros_cal}
 %\usepackage{mhchem} % \ce{}
 %\usepackage{macros_bm} % \bcM
 %\usepackage{macros_qed} % \qedmarker
@@ -24,6 +25,228 @@
 
 \beginArtNoToc
 \generatetitle{Maxwell equation, multivector Lagrangian.}
+
+\section{STA form of Maxwell's equation.}
+
+Maxwell's equations, with electric and fictional magnetic sources (useful for antenna theory and other engineering applications), are
+\begin{equation}\label{eqn:maxwellLagrangian:220}
+\begin{aligned}
+\spacegrad \cdot \BE &= \frac{\rho}{\epsilon} \\
+\spacegrad \cross \BE &= - \BM - \mu \PD{t}{\BH} \\
+\spacegrad \cdot \BH &= \frac{\rho_\txtm}{\mu} \\
+\spacegrad \cross \BH &= \BJ + \epsilon \PD{t}{\BE}.
+\end{aligned}
+\end{equation}
+We can assemble these into a single geometric algebra equation,
+\begin{equation}\label{eqn:maxwellLagrangian:240}
+   \lr{ \spacegrad + \inv{c} \PD{t}{} } F = \eta \lr{ c \rho - \BJ } + I \lr{ c \rho_{\mathrm{m}} - \BM },
+\end{equation}
+where \( F = \BE + \eta I \BH = \BE + I c \BB \), \( c = 1/\sqrt{\mu\epsilon}, \eta = \sqrt{(\mu/\epsilon)} \).
+
+By multiplying through by \( \gamma_0 \), making the identification \( \Be_k = \gamma_k \gamma_0 \), and
+\begin{equation}\label{eqn:maxwellLagrangian:300}
+\begin{aligned}
+   J^0 &= \frac{\rho}{\epsilon}, \quad J^k = \eta \lr{ \BJ \cdot \Be_k }, \quad J = J^\mu \gamma_\mu \\
+   M^0 &= c \rho_{\mathrm{m}}, \quad M^k = \BM \cdot \Be_k, \quad M = M^\mu \gamma_\mu \\
+   \grad &= \gamma^\mu \partial_\mu,
+\end{aligned}
+\end{equation}
+we find the STA form of Maxwell's equation, including magnetic sources
+\begin{equation}\label{eqn:maxwellLagrangian:320}
+   \grad F = J - I M.
+\end{equation}
+
+\section{Decoupling the electric and magnetic fields and sources.}
+We can utilize two separate four-vector potential fields to split Maxwell's equation into two parts.  Let
+\begin{equation}\label{eqn:maxwellLagrangian:1740}
+   F = F_{\mathrm{e}} + I F_{\mathrm{m}},
+\end{equation}
+where
+\begin{equation}\label{eqn:maxwellLagrangian:1760}
+\begin{aligned}
+   F_{\mathrm{e}} &= \grad \wedge A \\
+   F_{\mathrm{m}} &= \grad \wedge K,
+\end{aligned}
+\end{equation}
+and \( A, K \) are independent four-vector potential fields.  Plugging this into Maxwell's equation, and employing a duality transformation, gives us two coupled vector grade equations
+\begin{equation}\label{eqn:maxwellLagrangian:1780}
+\begin{aligned}
+   \grad \cdot F_{\mathrm{e}} - I \lr{ \grad \wedge F_{\mathrm{m}} } &= J \\
+   \grad \cdot F_{\mathrm{m}} + I \lr{ \grad \wedge F_{\mathrm{e}} } &= M.
+\end{aligned}
+\end{equation}
+However, since \( \grad \wedge F_{\mathrm{m}} = \grad \wedge F_{\mathrm{e}} = 0 \), by construction, the curls above are killed.  We may also add in \( \grad \wedge F_{\mathrm{e}} = 0 \) and \( \grad \wedge F_{\mathrm{m}} = 0 \) respectively, yielding two independent gradient equations
+\begin{equation}\label{eqn:maxwellLagrangian:1810}
+\begin{aligned}
+   \grad F_{\mathrm{e}} &= J \\
+   \grad F_{\mathrm{m}} &= M,
+\end{aligned}
+\end{equation}
+one for each of the electric and magnetic sources and their associated fields.
+\section{Tensor formulation.}
+The electromagnetic field \( F \), is a vector-bivector multivector in the multivector representation of Maxwell's equation, but is a bivector in the STA representation.  The split of \( F \) into it's electric and magnetic field components is observer dependent, but we may write it without reference to a specific observer frame as
+\begin{equation}\label{eqn:maxwellLagrangian:1830}
+   F = \inv{2} \gamma_\mu \wedge \gamma_\nu F^{\mu\nu},
+\end{equation}
+where \( F^{\mu\nu} \) is an abitrary antisymmetric 2nd rank tensor.  Maxwell's equation has a vector and trivector component, which may be split out explicitly using grade selection, to find
+\begin{equation}\label{eqn:maxwellLagrangian:360}
+\begin{aligned}
+   \grad \cdot F &= J \\
+   \grad \wedge F &= -I M.
+\end{aligned}
+\end{equation}
+Further dotting and wedging these equations with \( \gamma^\mu \) allows for extraction of scalar relations
+\begin{equation}\label{eqn:maxwellLagrangian:460}
+   \partial_\nu F^{\nu\mu} = J^{\mu}, \quad \partial_\nu G^{\nu\mu} = M^{\mu},
+\end{equation}
+where \( G^{\mu\nu} = -(1/2) \epsilon^{\mu\nu\alpha\beta} F_{\alpha\beta} \) is also an antisymmetric 2nd rank tensor.
+
+If we treat \( F^{\mu\nu} \) and \( G^{\mu\nu} \) as independent fields, this pair of equations is the coordinate equivalent to \cref{eqn:maxwellLagrangian:1760}, also decoupling the electric and magnetic source contributions to Maxwell's equation.
+
+\section{Coordinate representation of the Lagrangian.}
+As observed above, we may choose to express the decoupled fields as curls \( F_{\mathrm{e}} = \grad \wedge A \) or \( F_{\mathrm{m}} = \grad \wedge K \).  The coordinate expansion of either field component, given such a representation, is straight forward.  For example
+\begin{equation}\label{eqn:maxwellLagrangian:1850}
+\begin{aligned}
+   F_{\mathrm{e}}
+   &= \lr{ \gamma_\mu \partial^\mu } \wedge \lr{ \gamma_\nu A^\nu } \\
+   &= \inv{2} \lr{ \gamma_\mu \wedge \gamma_\nu } \lr{ \partial^\mu A^\nu - \partial^\nu A^\mu }.
+\end{aligned}
+\end{equation}
+
+We make the identification \( F^{\mu\nu} = \partial^\mu A^\nu - \partial^\nu A^\mu \), the usual definition of \( F^{\mu\nu} \) in the tensor formalism.  In that tensor formalism, the Maxwell Lagrangian is
+\begin{equation}\label{eqn:maxwellLagrangian:1870}
+\LL = - \inv{4} F_{\mu\nu} F^{\mu\nu} - A_\mu J^\mu.
+\end{equation}
+We may show this though application of the Euler-Lagrange equations
+\begin{equation}\label{eqn:maxwellLagrangian:600}
+   \PD{A_\mu}{\LL} = \partial_\nu \PD{(\partial_\nu A_\mu)}{\LL}.
+\end{equation}
+\begin{equation}\label{eqn:maxwellLagrangian:1930}
+\begin{aligned}
+   \PD{(\partial_\nu A_\mu)}{\LL}
+   &= -\inv{4} (2) \lr{ \PD{(\partial_\nu A_\mu)}{F_{\alpha\beta}} } F^{\alpha\beta} \\
+   &= -\inv{2} \delta^{[\nu\mu]}_{\alpha\beta} F^{\alpha\beta} \\
+   &= -\inv{2} \lr{ F^{\nu\mu} - F^{\mu\nu} } \\
+   &= F^{\mu\nu}.
+\end{aligned}
+\end{equation}
+So \( \partial_\nu F^{\mu\nu} = J^\mu \), equivalent to \( \grad \cdot F = J \).
+
+\section{Coordinate-free representation and variation of the Lagrangian.}
+Because
+\begin{equation}\label{eqn:maxwellLagrangian:200}
+   F^2 =
+-\inv{2}
+   F^{\mu\nu} F_{\mu\nu}
+   +
+\lr{ \gamma_\alpha \wedge \gamma^\beta }
+   F_{\alpha\mu}
+   F^{\beta\mu}
+   +
+   \frac{I}{4}
+   \epsilon_{\mu\nu\alpha\beta} F^{\mu\nu} F^{\alpha\beta},
+\end{equation}
+we may express the Lagrangian \cref{eqn:maxwellLagrangian:1870} in a coordinate free representation
+\begin{equation}\label{eqn:maxwellLagrangian:1890}
+   \LL = \inv{2} F \cdot F - A \cdot J,
+\end{equation}
+where \( F = \grad \wedge A \).
+
+We will now show that it is also possible to apply the variational principle to the following multivector Lagrangian
+\begin{equation}\label{eqn:maxwellLagrangian:1910}
+   \LL = \inv{2} F^2 - A \cdot J,
+\end{equation}
+and recover the geometric algebra form \( \grad F = J \) of Maxwell's equation in it's entirety, including both vector and trivector components in one shot.
+
+We will need a few geometric algebra tools to do this.
+
+The first such tool is the notational freedom to let the gradient act bidirectionally on multivectors to the left and right.  We will designate such action with over-arrows, sometimes also using braces to limit the scope of the action in question.  If \( Q, R \) are multivectors, then the bidirectional action of the gradient in a \( Q, R \) sandwich is
+\begin{equation}\label{eqn:maxwellLagrangian:1950}
+\begin{aligned}
+   Q \lrgrad R
+   &= Q \lgrad R + Q \rgrad R \\
+   &= \lr{ Q \gamma^\mu \lpartial_\mu } R + Q \lr{ \gamma^\mu \rpartial_\mu R } \\
+   &= \lr{ \partial_\mu Q } \gamma^\mu R + Q \gamma^\mu \lr{ \partial_\mu R }.
+\end{aligned}
+\end{equation}
+In the final statement, the partials are acting exclusively on \( Q \) and \( R \) respectively, but the \( \gamma^\mu \) factors must remain in place, as they do not neccessarily commute with any of the multivector factors.
+
+This bidirectional action is a critical aspect of the Fundamental Theorem of Geometric calculus, another tool that we will require.  The specific form of that theorem that we will utilize here is
+\begin{equation}\label{eqn:maxwellLagrangian:1970}
+   \int_V Q d^4 \Bx \grad R = \int_{\partial V} Q d^3 \Bx R,
+\end{equation}
+where \( d^4 \Bx = I d^4 x \) is the pseudoscalar four-volume element associated with a parameterization of space time.  For our purposes, we may assume that parameterization are standard basis coordinates associated with the basis \( \setlr{ \gamma_0, \gamma_1, \gamma_2, \gamma_3 } \).  The surface differential form \( d^3 \Bx \) can be given specific meaning, but we do not actually care what that form is here, as all our surface integrals will be zero due to the boundary constraints of the variational principle.
+
+Finally, we will utilize the fact that bivector products can be split into grade \(0,4\) and \( 2 \) components using anticommutator and commutator products, namely, given two bivectors \( F, G \), we have
+\begin{equation}\label{eqn:maxwellLagrangian:1990}
+\begin{aligned}
+   \gpgrade{ F G }{0,4} &= \inv{2} \lr{ F G + G F } \\
+   \gpgrade{ F G }{2} &= \inv{2} \lr{ F G - G F }.
+\end{aligned}
+\end{equation}
+
+We may now proceed to evaluate the variation of the action for our presumed Lagrangian
+\begin{equation}\label{eqn:maxwellLagrangian:2010}
+   S = \int d^4 x \lr{ \inv{2} F^2 - A \cdot J }.
+\end{equation}
+We seek solutions of the variational equation \( \delta S = 0 \), that are satisfied for all variations \( \delta A \), where the four-potential variations \( \delta A \) are zero on the boundaries of this action volume (i.e. an infinite spherical surface.)
+
+We may start our variation in terms of \( F \) and \( A \)
+\begin{equation}\label{eqn:maxwellLagrangian:1540}
+\begin{aligned}
+\delta S
+&=
+\int d^4 x \lr{ \inv{2} \lr{ \delta F } F + F \lr{ \delta F } } - \lr{ \delta A } \cdot J \\
+&=
+\int d^4 x \gpgrade{ \lr{ \delta F } F - \lr{ \delta A } J }{0} \\
+&=
+\int d^4 x \gpgrade{ \lr{ \grad \wedge \lr{\delta A} } F - \lr{ \delta A } J }{0} \\
+&=
+-\int d^4 x \gpgrade{ \lr{ \lr{\delta A} \grad } F - \lr{ \lr{ \delta A } \cdot \grad } F + \lr{ \delta A } J }{0,4} \\
+&=
+-\int d^4 x \gpgrade{ \lr{ \lr{\delta A} \grad } F + \lr{ \delta A } J }{0,4}.
+\end{aligned}
+\end{equation}
+
+Let's use arrows to clarify the directionality of this first part of the action variation, writing
+\begin{equation}\label{eqn:maxwellLagrangian:1580}
+\begin{aligned}
+\delta S
+&=
+-\int d^4 x \gpgrade{ \lr{\delta A} \lgrad F + \lr{ \delta A } J }{0,4} \\
+&=
+-\int d^4 x \gpgrade{ \lr{\delta A} \lrgrad F - \lr{\delta A} \rgrad F + \lr{ \delta A } J }{0,4}.
+\end{aligned}
+\end{equation}
+We can cast the first term into an integrand that can be evaluated using the Fundamental Theorem of Geometric Calculus, by introducing a
+a parameterization \( x = x(a_\mu) \), for which the tangent space basis vectors are \( \Bx_{a_\mu} = \PDi{a_\mu}{x} \), and the pseudoscalar volume element is
+\begin{equation}\label{eqn:maxwellLagrangian:1640}
+   d^4 \Bx = \lr{ \Bx_{a_0} \wedge \Bx_{a_1} \wedge \Bx_{a_2} \wedge \Bx_{a_3} } da_0 da_1 da_2 da_3 = I d^4 x.
+\end{equation}
+Writing \( d^4 x = -I d^4 \Bx \), we have
+\begin{equation}\label{eqn:maxwellLagrangian:1600}
+\begin{aligned}
+\delta S
+&=
+-\int_V d^4 x \gpgrade{ \lr{\delta A} \lrgrad F - \lr{\delta A} \rgrad F + \lr{ \delta A } J }{0,4} \\
+&=
+-\int_V \gpgrade{ -\lr{\delta A} I d^4 \Bx \lrgrad F - d^4 x \lr{\delta A} \rgrad F + d^4 x \lr{ \delta A } J }{0,4} \\
+&=
+\int_{\partial V} \gpgrade{ \lr{\delta A} I d^3 \Bx F }{0,4}
++ \int_V d^4 x \gpgrade{ \lr{\delta A} \lr{ \rgrad F - J + I M } }{0,4}.
+\end{aligned}
+\end{equation}
+The first integral is killed since \( \delta A = 0 \) on the boundary.  For the second integral to be zero for all variations \( \delta A \), we must have
+\begin{equation}\label{eqn:maxwellLagrangian:1660}
+   \gpgrade{ \lr{\delta A} \lr{ \rgrad F - J + I M } }{0,4} = 0,
+\end{equation}
+but have argued previously that we can drop the grade selection, leaving
+\begin{equation}\label{eqn:maxwellLagrangian:1620}
+   \boxed{
+      \grad F = J
+   },
+\end{equation}
+where the directional indicator on our gradient has been dropped, since there is no longer any ambiguity.  This is Maxwell's equation in it's coordinate free STA form, found using the variational principle from a coordinate free multivector Maxwell Lagrangian, without having to resort to a coordinate expansion of that Lagrangian.
 
 
 %}
