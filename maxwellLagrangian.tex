@@ -225,7 +225,7 @@ Writing \( d^4 x = -I d^4 \Bx \), we have
 \end{equation}
 The first integral is killed since \( \delta A = 0 \) on the boundary.  The remaining integrand can be simplified to
 \begin{equation}\label{eqn:maxwellLagrangian:1660}
-   \gpgrade{ \lr{\delta A} \lr{ \rgrad F - J } }{0,4} = 
+   \gpgrade{ \lr{\delta A} \lr{ \rgrad F - J } }{0,4} =
    \gpgrade{ \lr{\delta A} \lr{ \grad F - J } }{0},
 \end{equation}
 where the grade-4 filter has also been discarded since \( \grad F = \grad \cdot F + \grad \wedge F = \grad \cdot F \) since \( \grad \wedge F = \grad \wedge \grad \wedge A = 0 \) by construction, which implies that the only non-zero grades in the multivector \( \grad F - J \) are vector grades.  Also, the directional indicator on the gradient has been dropped, since there is no longer any ambiguity.  We seek solutions of \( \gpgrade{ \lr{\delta A} \lr{ \grad F - J } }{0} = 0 \) for all variations \( \delta A \), namely
@@ -237,8 +237,9 @@ where the grade-4 filter has also been discarded since \( \grad F = \grad \cdot 
 This is Maxwell's equation in it's coordinate free STA form, found using the variational principle from a coordinate free multivector Maxwell Lagrangian, without having to resort to a coordinate expansion of that Lagrangian.
 
 \section{Lagrangian for fictitious magnetic sources.}
+\subsection{Two independent potentials.}
 The generalization of the Lagrangian to include magnetic charge and current densities can be as simple as utilizing two independent four-potential fields
-\begin{equation}\label{eqn:maxwellLagrangian:n}
+\begin{equation}\label{eqn:maxwellLagrangian:2030}
     \LL = \inv{2} \lr{ \grad \wedge A }^2 - A \cdot J + \alpha \lr{ \inv{2} \lr{ \grad \wedge K }^2 - K \cdot M },
 \end{equation}
 where \( \alpha \) is an arbitrary multivector constant.
@@ -256,7 +257,84 @@ We may add these, scaling the second by \( -I \) (recall that \( I, \grad \) ant
 \end{equation}
 which is \( \grad F = J - I M \), as desired.
 
-It would be interesting to explore whether it is possible find Lagrangian that is dependent on a multivector potential, that would yield \( \grad F = J - I M \) directly, instead of requiring a superposition operation from the two independent solutions.  One such possible potential is \( \tilde{A} = A - I K \), for which \( F = \gpgradetwo{ \grad \tilde{A} } = \grad \wedge A + I \lr{ \grad \wedge K } \).  The author was not successful constructing such a Lagrangian.
+\subsection{Using a multivector potential.}
+Initially I had trouble generalizing the ideas above to use a single potential for both the electric and magnetic sources, but this can be done, provided one is careful enough..  Recall that we found that a useful formulation for the field in terms of two potentials is
+\begin{equation}\label{eqn:maxwellLagrangian:2050}
+   F = F_{\mathrm{e}} + I F_{\mathrm{m}},
+\end{equation}
+where
+\begin{equation}\label{eqn:maxwellLagrangian:2070}
+\begin{aligned}
+   F_{\mathrm{e}} = \grad \wedge A \\
+   F_{\mathrm{m}} = \grad \wedge K,
+\end{aligned}
+\end{equation}
+and where \( A, K \) are arbitrary four-vector potentials.
+Use of two potentials allowed us to decouple Maxwell's equations into two separate gradient equations.  We don't want to do that now, but let's see how we can combine the two fields into a single multivector potential.  Letting the gradient act bidirectionally, and introducing a dummy grade-two selection into the mix, we have
+\begin{equation}\label{eqn:maxwellLagrangian:2090}
+\begin{aligned}
+F
+&= \rgrad \wedge A + I \lr{ \rgrad \wedge K } \\
+&= - A \wedge \lgrad - I \lr{ K \wedge \lgrad } \\
+&= -\gpgradetwo{ A \wedge \lgrad + I \lr{ K \wedge \lgrad } } \\
+&= -\gpgradetwo{ A \lgrad + I K \lgrad } \\
+&= -\gpgradetwo{ \lr{ A + I K } \lgrad }.
+\end{aligned}
+\end{equation}
+Now, we call
+\begin{equation}\label{eqn:maxwellLagrangian:2110}
+   N = A + I K,
+\end{equation}
+(a 1,3 multivector), the multivector potential, and write the electromagnetic field not in terms of curls explicitly, but using a grade-2 selection filter
+\begin{equation}\label{eqn:maxwellLagrangian:2130}
+   F = -\gpgradetwo{ N \lgrad }.
+\end{equation}
+
+We can now form the following multivector Lagrangian
+\begin{equation}\label{eqn:maxwellLagrangian:2150}
+   \LL = \inv{2} F^2 - \gpgrade{ N \lr{ J - I M } }{0,4},
+\end{equation}
+and vary the action to (eventually) find our multivector Maxwell's equation, without ever resorting to coordinates.  We have
+\begin{equation}\label{eqn:maxwellLagrangian:2170}
+\begin{aligned}
+   \delta S
+   &= \int d^4 x \inv{2} \lr{ \lr{ \delta F } F + F \lr{ \delta F } } - \gpgrade{ \delta N \lr{ J - I M } }{0,4} \\
+   &= \int d^4 x \gpgrade{ \lr{ \delta F } F - \lr{ \delta N } \lr{ J - I M } }{0,4} \\
+   &= \int d^4 x \gpgrade{ -\gpgradetwo{ \lr{ \delta N} \lgrad } F - \lr{ \delta N } \lr{ J - I M } }{0,4} \\
+   &= \int d^4 x \gpgrade{ -\gpgradetwo{ \lr{ \delta N} \lrgrad } F +\gpgradetwo{ \lr{ \delta N} \rgrad } F - \lr{ \delta N } \lr{ J - I M } }{0,4}.
+\end{aligned}
+\end{equation}
+The \( \lrgrad \) term can be evaluated using the fundamential theorem of GC, and will be zero, as \( \delta N = 0 \) on the boundary.  Let's look at the next integrand term a bit more carefully
+\begin{equation}\label{eqn:maxwellLagrangian:2190}
+\begin{aligned}
+\gpgrade{ \gpgradetwo{ \lr{ \delta N} \rgrad } F }{0,4}
+&=
+\gpgrade{ \gpgradetwo{ \lr{ \lr{ \delta A } + I \lr{ \delta K } } \rgrad } F }{0,4} \\
+&=
+\gpgrade{ \lr{ \lr{\delta A} \wedge \rgrad + I \lr{ \lr{ \delta K } \wedge \rgrad }} F }{0,4} \\
+&=
+\gpgrade{ \lr{\delta A} \rgrad F - \lr{ \lr{\delta A} \cdot \rgrad} F + I \lr{ \delta K } \rgrad F - I \lr{ \lr{ \delta K } \cdot \rgrad} F }{0,4} \\
+&=
+\gpgrade{ \lr{\delta A} \rgrad F + I \lr{ \delta K } \rgrad F }{0,4} \\
+&=
+\gpgrade{ \lr{ \lr{\delta A} + I \lr{ \delta K} } \rgrad F }{0,4} \\
+&=
+\gpgrade{ \lr{ \delta N} \rgrad F }{0,4},
+\end{aligned}
+\end{equation}
+so
+\begin{equation}\label{eqn:maxwellLagrangian:2210}
+\begin{aligned}
+   \delta S
+   &= \int d^4 x \gpgrade{ \lr{ \delta N} \rgrad F - \lr{ \delta N } \lr{ J - I M } }{0,4} \\
+   &= \int d^4 x \gpgrade{ \lr{ \delta N} \lr{ \rgrad F - \lr{ J - I M } } }{0,4}.
+\end{aligned}
+\end{equation}
+for this to be zero for all variations \( \delta N \) of the 1,3-multivector potential \( N \), we must have
+\begin{equation}\label{eqn:maxwellLagrangian:2230}
+   \grad F = J - I M.
+\end{equation}
+This is Maxwell's equation, as desired, including both electric and (if desired) magnetic sources.
 
 %}
 %\EndArticle
